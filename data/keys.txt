@@ -1,0 +1,242 @@
+Global Energy Forecasting Competition 2012 - Load Forecasting
+Chess ratings - Elo versus the Rest of the World
+Challenges in Representation Learning: Facial Expression Recognition Challenge
+Integer Sequence Learning
+Event Recommendation Engine Challenge
+Data Mining Hackathon on BIG DATA (7GB) Best Buy mobile web site
+San Francisco Crime Classification
+West Nile Virus Prediction
+The ICML 2013 Whale Challenge - Right Whale Redux
+Google Cloud & YouTube-8M Video Understanding Challenge
+Detecting Insults in Social Commentary
+Amazon.com - Employee Access Challenge
+Avito Context Ad Clicks
+March Machine Learning Mania 2015
+Billion Word Imputation
+Right Whale Recognition
+Loan Default Prediction - Imperial College London
+Flu Forecasting
+Facebook Recruiting III - Keyword Extraction
+Homesite Quote Conversion
+Leaping Leaderboard Leapfrogs
+Forest Cover Type Prediction
+Dogs vs. Cats
+The Marinexplore and Cornell University Whale Detection Challenge
+Titanic: Machine Learning from Disaster
+AMS 2013-2014 Solar Energy Prediction Contest
+Multi-modal Gesture Recognition
+15.071x - The Analytics Edge (Spring 2015)
+Western Australia Rental Prices 
+Painter by Numbers
+Quora Question Pairs
+How Much Did It Rain?
+Tourism Forecasting Part Two
+Walmart Recruiting - Store Sales Forecasting
+MLSP 2014 Schizophrenia Classification Challenge
+Heritage Health Prize
+KDD Cup 2013 - Author Disambiguation Challenge (Track 2)
+Liberty Mutual Group - Fire Peril Loss Cost
+The Hunt for Prohibited Content
+Yelp Restaurant Photo Classification
+ICDAR2013 - Gender Prediction from Handwriting
+KDD Cup 2012, Track 2
+Predicting Red Hat Business Value
+Santander Customer Satisfaction
+Multi-label Bird Species Classification - NIPS 2013
+ICDM 2015: Drawbridge Cross-Device Connections
+Personalized Web Search Challenge
+Belkin Energy Disaggregation Competition
+World Cup 2010 - Take on the Quants
+Stay Alert! The Ford Challenge
+Don't Overfit!
+CIFAR-10 - Object Recognition in Images
+INFORMS Data Mining Contest 2010
+Prudential Life Insurance Assessment
+Predicting a Biological Response
+CPROD1: Consumer PRODucts contest #1
+EMI Music Data Science Hackathon - July 21st - 24 hours
+Greek Media Monitoring Multilabel Classification (WISE 2014)
+Follow the Money: Investigative Reporting Prospect
+Will I Stay or Will I Go?
+Planet: Understanding the Amazon from Space
+Driver Telematics Analysis
+Mapping Dark Matter
+Melbourne University AES/MathWorks/NIH Seizure Prediction
+MLSP 2013 Bird Classification Challenge
+KDD Cup 2012, Track 1
+Santander Product Recommendation
+The Analytics Edge (15.071x)
+Avito Duplicate Ads Detection
+Leaf Classification
+Conway's Reverse Game of Life
+Semi-Supervised Feature Learning
+ECML/PKDD 15: Taxi Trajectory Prediction (I)
+Million Song Dataset Challenge
+Challenges in Representation Learning: The Black Box Learning Challenge
+Predict HIV Progression
+Dogs vs. Cats Redux: Kernels Edition
+Online Product Sales
+Personalize Expedia Hotel Searches - ICDM 2013
+Tourism Forecasting Part One
+March Machine Learning Mania
+First Steps With Julia
+Display Advertising Challenge
+Getting Started
+The Winton Stock Market Challenge
+Influencers in Social Networks
+Just the Basics - Strata 2013
+GE Hospital Quest
+Allstate Purchase Prediction Challenge
+Caterpillar Tube Pricing
+Crowdflower Search Results Relevance
+Finding Elo
+Flavours of Physics: Finding τ  →  μμμ
+Eye Movements Verification and Identification Competition
+Cause-effect pairs
+EMC Israel Data Science Challenge
+Grupo Bimbo Inventory Demand
+Challenges in Representation Learning: Multi-modal Learning
+The Hewlett Foundation: Short Answer Scoring
+CHALEARN Gesture Challenge
+Yelp Recruiting Competition
+Outbrain Click Prediction
+Flight Quest 2: Flight Optimization, Main Phase
+CHALEARN Gesture Challenge 2
+Digit Recognizer
+American Epilepsy Society Seizure Prediction Challenge
+Poker Rule Induction
+CONNECTOMICS
+How Much Did It Rain? II
+Denoising Dirty Documents
+Sentiment Analysis on Movie Reviews
+Rossmann Store Sales
+Galaxy Zoo - The Galaxy Challenge
+KDD Cup 2014 - Predicting Excitement at DonorsChoose.org
+Predict Closed Questions on Stack Overflow
+Bosch Production Line Performance
+ICDAR 2011 - Arabic Writer Identification
+TalkingData Mobile User Demographics
+Africa Soil Property Prediction Challenge 
+Facebook Recruiting IV: Human or Robot?
+The ICML 2013 Bird Challenge
+Home Depot Product Search Relevance
+Santa's Uncertain Bags
+See Click Predict Fix - Hackathon
+Higgs Boson Machine Learning Challenge
+U.S. Census Return Rate Challenge
+Bag of Words Meets Bags of Popcorn
+MasterCard - Data Cleansing Competition
+Acquire Valued Shoppers Challenge
+Large Scale Hierarchical Text Classification
+Risky Business
+Two Sigma Connect: Rental Listing Inquiries
+Microsoft Malware Classification Challenge (BIG 2015)
+Diabetic Retinopathy Detection
+Restaurant Revenue Prediction
+Expedia Hotel Recommendations
+Job Recommendation Challenge
+Walmart Recruiting: Trip Type Classification
+Just the Basics - Strata 2013 After-party
+Airbnb New User Bookings
+What Do You Know?
+RTA Freeway Travel Time Prediction
+Transfer Learning on Stack Exchange Tags
+Introducing Kaggle Scripts
+March Machine Learning Mania 2016
+Deloitte/FIDE Chess Rating Challenge
+Algorithmic Trading Challenge
+Random Acts of Pizza
+RecSys2013: Yelp Business Rating Prediction
+Merck Molecular Activity Challenge
+Flight Quest 2: Flight Optimization, Final Phase
+Coupon Purchase Prediction
+National Data Science Bowl
+Dstl Satellite Imagery Feature Detection
+Psychopathy Prediction Based on Twitter Usage
+Liberty Mutual Group: Property Inspection Prediction
+ICDAR2013 - Handwriting Stroke Recovery from Offline Data
+R Package Recommendation Engine
+Sberbank Russian Housing Market
+The Allen AI Science Challenge
+Cervical Cancer Screening
+Wikipedia's Participation Challenge
+GigaOM WordPress Challenge: Splunk Innovation Prospect
+Give Me Some Credit
+Second Annual Data Science Bowl
+Springleaf Marketing Response
+Ultrasound Nerve Segmentation
+Kobe Bryant Shot Selection
+Practice Fusion Analyze This! 2012 - Open Challenge
+EMC Data Science Global Hackathon (Air Quality Prediction)
+DecMeg2014 - Decoding the Human Brain
+KDD Cup 2013 - Author-Paper Identification Challenge (Track 1)
+Grasp-and-Lift EEG Detection
+Data Science Bowl 2017
+Personality Prediction Based on Twitter Stream
+Facebook II - Mapping the Internet
+Facebook V: Predicting Check Ins
+Draper Satellite Image Chronology
+See Click Predict Fix
+What's Cooking?
+Harvard Business Review 'Vision Statement' Prospect
+ICFHR 2012 - Arabic Writer Identification
+BCI Challenge @ NER 2015
+As the World Churns
+Benchmark Bond Trade Price Challenge
+Predict Grant Applications
+The Hewlett Foundation: Automated Essay Scoring
+Tradeshift Text Classification
+Allstate Claim Prediction Challenge
+Two Sigma Financial Modeling Challenge
+Job Salary Prediction
+Telstra Network Disruptions
+State Farm Distracted Driver Detection
+Don't Get Kicked!
+NOAA Fisheries Steller Sea Lion Population Count
+UPenn and Mayo Clinic's Seizure Detection Challenge
+World Cup 2010 - Confidence Challenge
+The Nature Conservancy Fisheries Monitoring
+Walmart Recruiting II: Sales in Stormy Weather
+Prescription Volume Prediction
+Allstate Claims Severity
+Learning Social Circles in Networks
+Truly Native? 
+Helping Santa's Helpers
+Intel & MobileODT Cervical Cancer Screening
+Traveling Santa Problem
+Bike Sharing Demand
+IJCNN Social Network Challenge 
+Facebook Recruiting Competition
+Visualize the State of Public Education in Colorado
+ECML/PKDD 15: Taxi Trip Time Prediction (II)
+Data Science London + Scikit-learn
+Global Energy Forecasting Competition 2012 - Wind Forecasting
+dunnhumby & hack/reduce Product Launch Challenge
+Packing Santa's Sleigh
+Forecast Eurovision Voting 
+Click-Through Rate Prediction
+BNP Paribas Cardif Claims Management
+House Prices: Advanced Regression Techniques
+Flight Quest 2: Flight Optimization, Milestone Phase
+Predicting Parkinson's Disease Progression with Smartphone Data
+GE Flight Quest
+Santa's Stolen Sleigh
+Facial Keypoints Detection
+StumbleUpon Evergreen Classification Challenge
+Shelter Animal Outcomes
+Partly Sunny with a Chance of Hashtags
+Photo Quality Prediction
+Accelerometer Biometric Competition
+dunnhumby's Shopper Challenge
+March Machine Learning Mania 2017
+PAKDD 2014 - ASUS Malfunctional Components Prediction
+Practice Fusion Analyze This! 2012 - Prediction Challenge
+Observing Dark Worlds
+Data Mining Hackathon on (20 mb) Best Buy mobile web site - ACM SF Bay Area Chapter
+Raising Money to Fund an Organizational Mission
+Blue Book for Bulldozers
+The Big Data Combine Engineered by BattleFin
+Practice Fusion Diabetes Classification
+Ghouls, Goblins, and Ghosts... Boo! 
+Otto Group Product Classification Challenge
+The Random Number Grand Challenge
