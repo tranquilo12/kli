@@ -1,2 +1,2 @@
-# kl
-A Kaggle Cli (with bells &amp; whistles)
+# kli
+A Kaggle Cli (with a bell &amp; a whistle)
