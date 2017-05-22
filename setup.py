@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = 'kl', 
-    version = '0.0.1', 
+    name = 'kli', 
+    version = '0.0.11', 
     packages = find_packages(exclude=['venv', 'backup']),
     license = 'MIT',
     url = '',
@@ -18,7 +18,7 @@ setup(
         ],    
     entry_points = '''
         [console_scripts]
-        kl=main:kl
+        kli=kli.main:kli
     ''',
     data_files=[('data', ['comp.json']),
                 ('data', ['keys.txt'])]

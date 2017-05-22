@@ -1,6 +1,0 @@
-tqdm
-pprint
-argcomplete
-bs4
-click>=6
-cryptography
