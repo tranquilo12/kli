@@ -80,6 +80,8 @@ def dl(config, comp, tr=False, te=False):
     Downloads competition test or train data, 
     default downloads both (not recommended if time/space is of essence)
     """
+    #check if config file exists
+
     #check for comp validity
     comp = check_comp(comp)
 
