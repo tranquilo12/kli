@@ -1,5 +1,6 @@
 from .imports import * 
 from .classes import * 
+import json
 
 # 2. if it exists, login
 def login(config, session, root_url, test_url):
@@ -12,7 +13,12 @@ def login(config, session, root_url, test_url):
     # more innocuous
     # need to login first 
     username = ['']
-    login_data = config.config_file
+    config_file = config.config_file
+
+    login_data = {s:dict(config_file.items(s)) for s in config_file.sections()}
+    login_data = json.dumps(login_data['UserSettings'])
+    login_data = json.loads(login_data)
+    print(login_data)
     session.post(root_url + login_url, data=login_data)
 
     response = session.get(root_url + test_url)
@@ -64,4 +70,3 @@ def download_url(session, url):
             f.write(chunk)
     
     print('Done')
-

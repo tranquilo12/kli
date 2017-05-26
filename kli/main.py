@@ -15,67 +15,82 @@ def kli(config):
     """
     A unofficial Kaggle CLI with a few more features
     """
-    
+
 @kli.command()
 @pass_config
 def setup(config):
     """
-    Helps setup login details 
+    Helps setup login details.
     """
-    opt = {}
-    
     username = input('UserName: ')
     password = getpass.getpass(prompt='Password: ')
     password = str.encode(password)
     
-    # need to make sure that config file does not already 
-    # exist, and if it does, check its validity.
-    config_file = config.config_file
-    
-    try: 
-        key = str.encode(config_file['key'])
-    except (KeyError, NameError) as e: 
-        print('Conf file not found (or there was an error retrieving it)')
-        print('your Conf file will have to be replaced. please wait')
+    if not os.path.isfile(config.config_filepath): 
+        print("\nConfig file not found in %s \n" %config_path)
+        print("""You can make an empty config file in the above location, or
+run the command 'kli mconfig', which will make one for you.\n""")
+        sys.exit(0)
 
-        key = str.encode('hpm3j6mDfpL9yMEOkLwMSC2Qwa2jKyEnGeI08yNcv1I=')
+    # dont make the file, that's kli mconfig's resposibility
+    # assume the file is present, and replace with the users settings
 
+    conf = configparser.ConfigParser()
+    conf.read(config.config_filepath)
+    conf.optionxform = str
+   
+    key = conf['UserSettings']['key']
     cipher_suite = Fernet(key)
     cipher_text = cipher_suite.encrypt(password)
     cipher_text = cipher_text.decode()
     
-    opt['key'] = 'hpm3j6mDfpL9yMEOkLwMSC2Qwa2jKyEnGeI08yNcv1I='
-    opt['UserName'] = username
-    opt['Password'] = cipher_text
-    opt['action'] = 'login'
-    
-    with open(config_path, 'w') as f:
-        json.dump(opt, f)
+    conf['UserSettings']['key'] = key
+    conf['UserSettings']['Password'] =  cipher_text
+    conf['UserSettings']['UserName'] =  username
+    conf['UserSettings']['action'] = 'login'
+
+    with open(config.config_filepath, 'w') as f: 
+        conf.write(f)
     
     print('Done')
-    sys.exit()
-    
+    return(0)
+
 @kli.command()
-@click.option('--comp', default=None, type=str, help='Needs a competiton name to download either training or test Set')
+@pass_config
+def mconfig(config):
+    """
+    Makes config file, if one doesn't exist.
+    """
+    #check if the file exists, 
+    #and ask user to reset config instead 
+    if os.path.isfile(config.config_filepath): 
+        print("A config file already exists, 'kli setup' will reset your user settings instead.")
+    else:
+        print("Making new config file for user.")
+        config.make_config()
+        print("Done.")
+
+@kli.command()
+@click.option('--comp', default=None, type=str, help='Need competiton url to download data')
 @click.option('--tr', default=False, is_flag=True, help='This option downloads training set only')
 @click.option('--te', default=False, is_flag=True, help='This option downloads test set only')
 @pass_config
 def dl(config, comp, tr=False, te=False):
     """
     Downloads competition test or train data, 
-    default downloads both (not recommended if time is of essence)
+    default downloads both (not recommended if time/space is of essence)
     """
-    comp_exists = cexist(config, comp)
-    all_competitions = config.comp_file
+    #check for comp validity
+    comp = check_comp(comp)
 
-    if comp_exists:
-        print("""Competition Exists...""")
+    if comp != None:
+        print("""Competition Url Valid...""")
         with requests.Session() as session:
             logged_in = login(config, session, root_url, test_url)
             username = config.config_file['UserName']
             if logged_in:
                 print("""Logged in as %s...""" % username)
-                comp_url = str(all_competitions[comp][0])
+                comp_url = comp
                 rules_accepted = crules(session, root_url, comp_url, rules)
                 if rules_accepted:
                     print("""Rules accepted...""")
@@ -91,12 +106,10 @@ def dl(config, comp, tr=False, te=False):
                         download_url(session, trainingSetUrl)
                         sys.exit()
                     if tr==False and te==False:
-                        print("""No training or test option selected. Downloading both...""")
-                        
+                        print("""No --tr or --te option selected. Downloading all...""")
                         print("""Downloading Training set...""")
                         download_url(session, trainingSetUrl)
-                        
-                        print("""Downloading Training set...""")
+                        print("""Downloading Test set...""")
                         download_url(session, testSetUrl)
                 else:
                     print("""
@@ -111,44 +124,26 @@ def dl(config, comp, tr=False, te=False):
                         """)
                 return(0)
     else:
-        print("""
-                    No Competition mentioned, the command can be used as 'kl dl --comp <competion name>...'.
-                    A list of all competitions can be found by executing 'kl list'
-        """)
+        print("""No Competition Url given, please try again using the command 'kl dl --comp <competion name>...' """)
         return(0)
 
-#@kl.command()
-#@pass_config
-#def list(config):
-#    """
-#    Lists all competition names
-#    """
-#    comp_data = config.comp_load()
-#    with open('data/keys.txt', 'w') as f:
-#        for key in comp_data.keys():
-#            w = key + '\n'
-#            f.write(w)
-#    subprocess.call(['cat keys.txt | less'], shell=True)
-
-
-# all below functions are placed in order of execution in main loop (my mind works like that)
-# 1. Check if the competition exists
-@pass_config
-def cexist(config, comp=None): 
+# All below functions are placed in order of execution in main loop (my mind works like that)
+# Checks if the given competition url is properly formatted
+def check_comp(comp=None): 
     """
-    Checks if the given competition exists within the given data set
+    Checks if the given competition url is properly formatted
     """
     if(comp==None):
-        print("No competition name given, please try again with the --comp option")
-        sys.exit()
-    comp_data = config.comp_load()
-    if comp in comp_data.keys():
-        return(True)
-    else:
-        return(False)
-    
+        return(None)
+    if comp.endswith('/'): 
+        comp = comp[:-1]
+    if comp.startswith('/'): 
+        pass
+    else: 
+        comp = '/' + comp 
+    return(comp)
+
 # 3. if logged in, check if competition rules have been accepted by the user
-# @pass_config
 def crules(session, root_url, comp_url, rules):
     """
     Checks if competition rules have been accepted
@@ -156,8 +151,8 @@ def crules(session, root_url, comp_url, rules):
     response = session.get(root_url + comp_url + rules)
     soup = BeautifulSoup(response.text, 'lxml')
     hasAcceptedRules = re.findall('"hasAcceptedRules":(\w+)', str(soup))
-    
     if hasAcceptedRules[0]=='true':
         return(True)
     else:
         return(False) 
+    

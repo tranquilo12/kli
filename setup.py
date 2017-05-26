@@ -14,7 +14,8 @@ setup(
         'argcomplete',
         'bs4', 
         'click>=6', 
-        'cryptography'
+        'cryptography', 
+        'requests',
         ],    
     entry_points = '''
         [console_scripts]
