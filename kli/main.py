@@ -24,7 +24,6 @@ def setup(config):
     """
     username = input('UserName: ')
     password = getpass.getpass(prompt='Password: ')
-    password = str.encode(password)
     
     if not os.path.isfile(config.config_filepath): 
         print("\nConfig file not found in %s \n" %config_path)
@@ -41,7 +40,7 @@ run the command 'kli mconfig', which will make one for you.\n""")
    
     key = conf['UserSettings']['key']
     cipher_suite = Fernet(key)
-    cipher_text = cipher_suite.encrypt(password)
+    cipher_text = cipher_suite.encrypt(str.encode(password))
     cipher_text = cipher_text.decode()
     
     conf['UserSettings']['key'] = key
@@ -57,7 +56,7 @@ run the command 'kli mconfig', which will make one for you.\n""")
 
 @kli.command()
 @pass_config
-def mconfig(config):
+def make(config):
     """
     Makes config file, if one doesn't exist.
     """
@@ -67,7 +66,7 @@ def mconfig(config):
         print("A config file already exists, 'kli setup' will reset your user settings instead.")
     else:
         print("Making new config file for user.")
-        config.make_config()
+        config.config_write()
         print("Done.")
 
 @kli.command()
