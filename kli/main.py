@@ -110,17 +110,13 @@ def dl(config, comp):
                         download_url(session, root_url + links[o-1])
                 # if the rules were not accepted
                 else:
-                    print("""
-                    An Error occured whilst retrieving the page. 
-                    Perhaps the rules for this competion have not been accepted. 
-                    The rules can be accepted here %s
-                    """ % (root_url + comp_url + rules))
+                    print("""An Error occured whilst retrieving the page. 
+Perhaps the rules for this competion have not been accepted. 
+The rules can be accepted here %s""" % (root_url + comp_url + rules))
             # If not logged in
             else:
-                print("""
-                    Not logged in, perhaps due to an error in your username/password.
-                    You can overwrite your current user settings via the command 'kli setup'.
-                        """)
+                print("""Not logged in, perhaps due to an error in your username/password.
+You can overwrite your current user settings via the command 'kli setup'.""")
                 return(0)
     # if the competition url is not clean
     else:
@@ -181,10 +177,13 @@ def login(config, session, root_url, test_url):
     soup = BeautifulSoup(response.text, 'lxml')
     username = re.findall('"user_name": "(\w+)"', str(soup))
     
-    if username[0] == '' or username[0] == None:
+    try:
+        if username[0] == '' or username[0] == None:
+            return(False)
+        if username[0] == login_data['UserName']:
+            return(True)
+    except IndexError:
         return(False)
-    if username[0] == login_data['UserName']:
-        return(True)
 
 # 5. if rules are accepted, according to the flag passed, the file is downloaded
 def download_url(session, url):
