@@ -1,7 +1,4 @@
-#from .imports import * 
 from .classes import * 
-#import getpass
-#from cryptography.fernet import Fernet
 
 warnings.filterwarnings('ignore', category=UserWarning)
 CONFIG_SETTINGS = dict(auto_envvar_prefix='config')
@@ -211,5 +208,3 @@ def download_url(session, url):
             f.write(chunk)
     
     print('Done')
-
-    

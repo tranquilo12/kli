@@ -10,7 +10,8 @@ from bs4 import BeautifulSoup
 # for the progressbars 
 from tqdm import * 
 
-# for re for matching, sys for system access and time for timing
+# for re for matching, sys for system access, warnings to supresses some warnings, 
+# and os for making/reading files/dirs
 import re, json, warnings, sys, os
 
 # for password input, and crypto

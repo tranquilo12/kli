@@ -1,7 +1,4 @@
 from .imports import * 
-#import sys, os
-#import configparser
-#from cryptography.fernet import Fernet
 
 root_url = 'https://www.kaggle.com'
 login_url = '/account/login'
