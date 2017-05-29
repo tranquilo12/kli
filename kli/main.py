@@ -1,6 +1,5 @@
 from .imports import * 
 from .classes import * 
-from .support import * 
 import getpass
 from cryptography.fernet import Fernet
 
@@ -37,7 +36,7 @@ run the command 'kli mconfig', which will make one for you.\n""")
     conf = configparser.ConfigParser()
     conf.read(config.config_filepath)
     conf.optionxform = str
-   
+    
     key = conf['UserSettings']['key']
     cipher_suite = Fernet(key)
     cipher_text = cipher_suite.encrypt(str.encode(password))
@@ -71,10 +70,8 @@ def make(config):
 
 @kli.command()
 @click.option('--comp', default=None, type=str, help='Need competiton url to download data')
-@click.option('--tr', default=False, is_flag=True, help='This option downloads training set only')
-@click.option('--te', default=False, is_flag=True, help='This option downloads test set only')
 @pass_config
-def dl(config, comp, tr=False, te=False):
+def dl(config, comp):
     """
     Downloads competition test or train data, 
     default downloads both (not recommended if time/space is of essence)
@@ -88,44 +85,46 @@ def dl(config, comp, tr=False, te=False):
         print("""Competition Url Valid...""")
         with requests.Session() as session:
             logged_in = login(config, session, root_url, test_url)
-            username = config.config_file['UserName']
+            config_file = config.config_read()
+            username = config_file['UserSettings']['UserName']
             if logged_in:
                 print("""Logged in as %s...""" % username)
                 comp_url = comp
-                rules_accepted = crules(session, root_url, comp_url, rules)
+                rules_accepted = check_rules(session, root_url, comp_url, rules)
                 if rules_accepted:
                     print("""Rules accepted...""")
                     data_response = session.get(root_url + comp_url + '/data') 
                     soup = BeautifulSoup(data_response.text, 'lxml')
-                    testSetUrl, trainingSetUrl = get_links(soup, all_competitions[comp][0][3::])
-                    if te:
-                        print("""Downloading Test set...""")
-                        download_url(session, testSetUrl)
-                        sys.exit()
-                    if tr:
-                        print("""Downloading Training set...""")
-                        download_url(session, trainingSetUrl)
-                        sys.exit()
-                    if tr==False and te==False:
-                        print("""No --tr or --te option selected. Downloading all...""")
-                        print("""Downloading Training set...""")
-                        download_url(session, trainingSetUrl)
-                        print("""Downloading Test set...""")
-                        download_url(session, testSetUrl)
+                    #get the comp's name from the url (without /c/)
+                    comp_name = comp_url[3:]
+                    links = re.findall('"url":"(/c/{}/download/[^"]+)"'.format(comp_name), str(soup))
+                    print("""Files awailable for download: """)
+                    for link in links:
+                        print(link)
+                        
+                    print("""Which would you like to download? Your answer should be like: 1,2,3""")
+                    options = input("Options: ")
+                    
+                    for o in map(int, options.split(',')):
+                        print("""Downloading %s"""%links[o-1])
+                        download_url(session, root_url + links[o-1])
+                # if the rules were not accepted
                 else:
                     print("""
                     An Error occured whilst retrieving the page. 
                     Perhaps the rules for this competion have not been accepted. 
                     The rules can be accepted here %s
-                    """ % (root_url + comp_url + rules) )
+                    """ % (root_url + comp_url + rules))
+            # If not logged in
             else:
                 print("""
                     Not logged in, perhaps due to an error in your username/password.
-                    You can overwrite your current user settings via the command 'kl setup'.
+                    You can overwrite your current user settings via the command 'kli setup'.
                         """)
                 return(0)
+    # if the competition url is not clean
     else:
-        print("""No Competition Url given, please try again using the command 'kl dl --comp <competion name>...' """)
+        print("""No Competition Url given, please try again using the command 'kli dl --comp <competion url>' """)
         return(0)
 
 # All below functions are placed in order of execution in main loop (my mind works like that)
@@ -145,7 +144,7 @@ def check_comp(comp=None):
     return(comp)
 
 # 3. if logged in, check if competition rules have been accepted by the user
-def crules(session, root_url, comp_url, rules):
+def check_rules(session, root_url, comp_url, rules):
     """
     Checks if competition rules have been accepted
     """
@@ -156,4 +155,57 @@ def crules(session, root_url, comp_url, rules):
         return(True)
     else:
         return(False) 
+    
+# was in support.py, now in main    
+# 2. if it exists, login
+def login(config, session, root_url, test_url):
+    """
+    Check if the function has logged in, 
+    calls another function, which checks username once logged 
+    in, to ensure login and login of the right account
+    """
+    # may have to later change this to email or something 
+    # more innocuous
+    # need to login first 
+    username = ['']
+    login_data = config.config_read()
+    
+    login_data = {
+    "UserName":("%s"%login_data['UserSettings']['UserName']),
+    "Password":("%s"%login_data['UserSettings']['Password']),
+    "action":"Login",
+    }
+    
+    session.post(root_url + login_url, data=login_data)
+    response = session.get(root_url + test_url)
+    soup = BeautifulSoup(response.text, 'lxml')
+    username = re.findall('"user_name": "(\w+)"', str(soup))
+    
+    if username[0] == '' or username[0] == None:
+        return(False)
+    if username[0] == login_data['UserName']:
+        return(True)
+
+# 5. if rules are accepted, according to the flag passed, the file is downloaded
+def download_url(session, url):
+    """
+    Downloads test or train file: 
+    extracts name from url,
+    uses tqdm progressbar
+    """ 
+    response = session.get(url, stream=True)
+    content_type = response.headers.get('Content-Type')
+    
+    total_length = int(response.headers.get('Content-Length'))
+    
+    filename = re.compile('[^/]+$').search(url).group(0)
+    
+    with open(filename, 'wb') as f:
+        for chunk in tqdm(response.iter_content(chunk_size=1024), 
+                        total=total_length/1024, 
+                        unit='KB'):
+            f.write(chunk)
+    
+    print('Done')
+
     

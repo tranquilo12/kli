@@ -1,8 +1,7 @@
 from .imports import * 
-import sys, os, shutil
+import sys, os
 import configparser
 from cryptography.fernet import Fernet
-import time 
 
 root_url = 'https://www.kaggle.com'
 login_url = '/account/login'
@@ -10,26 +9,26 @@ test_url = '/c/titanic'
 rules = '/rules'
 data = '/data'
 
-config_path = click.get_app_dir('kli') + '/kli.ini'
 
 class config(object):
-    
-    def __init__(self, *args, **kwargs): 
-        self.config_filepath = config_path
-        # if the file location doesnt exit
-        if not os.path.isfile(config_path):
+
+    config_filepath = click.get_app_dir('kli') + '/kli.ini'
+
+    def __int__(self, *args, **kwargs): 
+        #self.config_filepath = config_filepath
+        # if the file location doesnt exist
+        if not os.path.isfile(self.config_filepath):
             os.makedirs(click.get_app_dir('kli'), exist_ok=True)
-            print("""\nFile not found. Maybe you need to run the command 'kli make' to make a new config file. 
-If you have run 'kli make', please wait...\n""")
-        # if the file location exists, check if its empty
+            print("\nMaking new config file...\n")
+            self.config_write()
+        # if the conf file does exit, check its integrity
         else:
-            # check if its empty, make one if it is
-            if os.stat(config_path).st_size == 0: 
+            if os.stat(self.config_filepath).st_size == 0:
                 print("""\nThe current config file seems to be currupted. 
 Please run the command 'kli make' to make a new config file.\n""")
             else:
-                # if its not empty, instantiate config path, and load config file
-                try: 
+                # if the config file exists, and is valid
+                try:
                     self.config_file = self.config_read()
                 except ValueError:
                     print("\nError retrieving conf file, try deleting it and then running the command 'kli make'.\n")
@@ -41,11 +40,7 @@ Please run the command 'kli make' to make a new config file.\n""")
         conf.add_section('UserSettings')
         key = 'hpm3j6mDfpL9yMEOkLwMSC2Qwa2jKyEnGeI08yNcv1I='
         conf['UserSettings']['key'] = key
-        # below password is already hashed, default unhashed password = password 
-        #conf['UserSettings']['Password'] = 'gAAAAABZC018YC8y4q9gdnI-xIuNXeySuP-hOIqkqTkKxAiSQOZvGPToU8wan6_xgm8bXk-KdrBdJjsdhGOnDv1PC5ipU5FbqQ==' 
-        #conf['UserSettings']['UserName'] = 'UserName'
-        #conf['UserSettings']['action'] = 'login'
-        with open(config_path, 'w') as f: 
+        with open(self.config_filepath, 'w') as f: 
             conf.write(f)
         print("""\nThe config file was restored to its default value (or a new config file was made). 
 You can reset your user settings via the command 'kl setup'.\n""")

@@ -13,40 +13,23 @@ def login(config, session, root_url, test_url):
     # more innocuous
     # need to login first 
     username = ['']
-    config_file = config.config_file
-
-    login_data = {s:dict(config_file.items(s)) for s in config_file.sections()}
-    login_data = json.dumps(login_data['UserSettings'])
-    login_data = json.loads(login_data)
+    login_data = config.config_read()
+    
+    login_data = {
+    "UserName":("%s"%login_data['UserSettings']['UserName']),
+    "Password":("%s"%login_data['UserSettings']['Password']),
+    "action":"Login",
+    }
+    
     session.post(root_url + login_url, data=login_data)
-
     response = session.get(root_url + test_url)
     soup = BeautifulSoup(response.text, 'lxml')
     username = re.findall('"user_name": "(\w+)"', str(soup))
     
-    if username[0]=='' or username[0]==None: 
+    if username[0] == '' or username[0] == None:
         return(False)
-    if username[0]==login_data['UserName']:
-        return(True) 
-    
-# 4. if rules are accepted, get train and test links from soup
-def get_links(soup, comp_url):
-    """
-    Gets Test and Train links from the site's soup
-    """
-    testSetUrl = ''
-    trainingSetUrl = ''
-    links = re.findall('"url":"(/c/{}/download/[^"]+)"'.format(comp_url), str(soup))
-    
-    train_exp = re.compile(r'train')
-    test_exp = re.compile(r'test')
-
-    for link in links:
-        if train_exp.search(link):
-            trainingSetUrl = root_url + link
-        if test_exp.search(link):
-            testSetUrl = root_url + link
-    return(testSetUrl, trainingSetUrl)
+    if username[0] == login_data['UserName']:
+        return(True)
 
 # 5. if rules are accepted, according to the flag passed, the file is downloaded
 def download_url(session, url):
