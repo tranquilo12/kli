@@ -1,7 +1,7 @@
-from .imports import * 
+#from .imports import * 
 from .classes import * 
-import getpass
-from cryptography.fernet import Fernet
+#import getpass
+#from cryptography.fernet import Fernet
 
 warnings.filterwarnings('ignore', category=UserWarning)
 CONFIG_SETTINGS = dict(auto_envvar_prefix='config')
@@ -34,7 +34,12 @@ run the command 'kli mconfig', which will make one for you.\n""")
     # assume the file is present, and replace with the users settings
 
     conf = configparser.ConfigParser()
-    conf.read(config.config_filepath)
+    try:
+        conf.read(config.config_filepath)
+    except configparser.DuplicateOptionError:
+        print("A naming conflit has occured in the conf file. Please delete it, and try the commands 'kli make', and 'kli setup' to refresh the file.")
+        sys.exit(0)
+        
     conf.optionxform = str
     
     key = conf['UserSettings']['key']
