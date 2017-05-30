@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = 'kli', 
-    version = '0.0.10', 
+    version = '0.0.12', 
     packages = find_packages(exclude=['venv', 'backup']),
     license = 'MIT',
     url = 'https://github.com/tranquilo12/kli',
@@ -16,12 +16,13 @@ setup(
         'click>=6', 
         'cryptography', 
         'requests',
+        'lxml',
         ],    
     entry_points = '''
         [console_scripts]
         kli=kli.main:kli
     ''',
     keywords = ['kaggle', 'cli'],
-    data_files=[('data', ['comp.json']),
-                ('data', ['keys.txt'])]
+    #data_files=[('data', ['comp.json']),
+    #            ('data', ['keys.txt'])]
         )

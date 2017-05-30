@@ -10,3 +10,6 @@ kli/__pycache__/classes2.cpython-34.pyc
 kli/__pycache__/support2.cpython-34.pyc
 kli/.ipynb_checkpoints
 tests.py
+dist
+build
+upload.sh
