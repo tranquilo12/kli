@@ -106,7 +106,15 @@ def dl(config, comp):
                         
                     print("""Which would you like to download? Your answer should be like: 1,2,3""")
                     options = input("Options: ")
-                    
+                    # check integrity of options
+                    if len(options) == 0:
+                        print('No option provided, please try again with valid options.')
+                        sys.exit(0)
+                    for s in options.split(','): 
+                        if not s.isdigit(): 
+                            print('Invalid option(s). Please provide digits only.')
+                            sys.exit(0)
+                    # download if integrety is fine
                     for o in map(int, options.split(',')):
                         print("""Downloading %s"""%links[o-1])
                         download_url(session, root_url + links[o-1])
