@@ -1,2 +1,2 @@
-# Kaggle-Cli (kli)
-A Kaggle Cli (with a setup file, and some error checks)
+# Kaggle-CLI (kli)
+A Kaggle CLI (with a setup file, and some error checks)
