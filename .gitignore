@@ -1,4 +1,5 @@
 kagEnv
+data
 archive
 kl.egg-info
 kli/classes2.py
@@ -9,4 +10,3 @@ kli/__pycache__/classes2.cpython-34.pyc
 kli/__pycache__/support2.cpython-34.pyc
 kli/.ipynb_checkpoints
 tests.py
-data/*
