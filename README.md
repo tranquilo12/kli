@@ -1,5 +1,5 @@
 # Kaggle-CLI (kli)
-A Kaggle CLI (with a setup file, and some error checks) 
+An unoffical Kaggle CLI (with a setup file, and some error checks) 
 
 	Installation: pip install kli 
 	
