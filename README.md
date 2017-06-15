@@ -28,7 +28,8 @@ $ kli setup
 
 - This will ask you for your kaggle username (**not** email) and password, which will be used to log into your kaggle account.
 - The password is encrypted with cryptography's Fernet module to trip OTS attacks **ONLY**.
-- Any **FileNotFoundError**'s you face can be solved by the **kli make** command. 
+-- This feature is kept as one can copy this **.ini** file to any node you're working on as a non-sudo user, paste it in the approproate location ( ~/.config/kli/ ), and provided kli is installed, one can just log in without having to set things up again. But again, setting up kli is also easy.
+- Any **FileNotFoundError**'s you face can be solved by the **kli make** command.
 
 The file ( kli.ini ) looks like this :
 ```
