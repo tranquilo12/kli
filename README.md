@@ -1,4 +1,4 @@
-# Kaggle-Cli (kli)
+# Kaggle-CLI (kli)
 Powered by [Click](http://click.pocoo.org/5)
 
 **kli** is an unoffical Kaggle-Cli which helps you avoid entering your username and password repeatedly when downloading a data file from kaggle.
